@@ -1,0 +1,22 @@
+flows:
+  describe_visual_prompt:
+    description: Understand user's creative prompt and extract visual elements.
+    steps:
+      - collect: user_prompt
+        description: the user’s creative input describing a visual scene
+
+      - action: action_apply_spacy
+
+      - action: action_summarize_prompt
+
+      - collect: user_validation
+        next:
+          - if: slots.user_validation
+            then:
+              - action: utter_confirmed
+              - action: action_generate_image_from_rasa
+                next: END
+          - else:
+              - action: utter_ask_rephrase
+              - collect: user_prompt
+                next: END

@@ -1,0 +1,20 @@
+# Core Rasa
+rasa==3.6.10
+rasa-sdk==3.6.2
+
+# Compatible NLP & ML
+spacy==3.6.1
+scikit-learn==1.1.3
+numpy==1.24.4
+pandas==1.5.3
+
+# Jupyter / Notebook Dev
+notebook
+ipykernel
+ipython==8.12.3
+prompt-toolkit==3.0.28
+
+# Optional (mais utiles)
+jedi==0.18.2
+colorama
+rich

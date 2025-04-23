@@ -1,0 +1,83 @@
+version: "3.1"
+
+slots:
+  user_prompt:
+    type: text
+    influence_conversation: false
+
+  user_validation:
+    type: bool
+    influence_conversation: true
+
+  style:
+    type: text
+    influence_conversation: false
+
+  objects:
+    type: text
+    influence_conversation: false
+
+  scenes:
+    type: text
+    influence_conversation: false
+
+  colors:
+    type: text
+    influence_conversation: false
+
+  mood:
+    type: text
+    influence_conversation: false
+
+  action:
+    type: text
+    influence_conversation: false
+
+actions:
+  - action_apply_spacy
+  - action_summarize_prompt
+  - action_generate_image_from_rasa
+
+
+
+responses:
+  utter_ask_user_prompt:
+    - text: "Please describe your visual scene."
+
+  utter_ask_user_validation:
+    - text: |
+        Does this look right to you? 😊
+        Should we generate image based on this prompt?
+        - Average Time : 2 minutes
+        (Yes/No)
+  utter_confirmed:
+    - text: "Awesome, happy to help! ✅ Let's move forward."
+
+  utter_could_not_understand:
+    - text: "Sorry, I couldn't extract any visual details. Try rephrasing it?"
+  
+  utter_ask_rephrase:
+    - text: "Could you please rephrase your prompt? I couldn't extract any visual details."
+  utter_visual_prompt_collected:
+    - text: >
+        Thanks! Here's what I understood from your prompt:
+        - Scenes: {scenes}
+        - Objects: {objects}
+        - Colors: {colors}
+        - Moods: {moods}
+        - Actions: {actions}
+        - Styles: {styles}
+
+  utter_free_chitchat_response:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant built with Rasa.
+          The assistant can help the user sending prompt analysing them then only after sending the prompt to a GAN to generate image based on prompt.
+          The assistant is helpful, creative, clever, and very friendly.
+          The user is making small talk, and the assistant should respond, keeping things light.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:

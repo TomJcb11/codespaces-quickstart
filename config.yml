@@ -1,0 +1,17 @@
+recipe: default.v1
+language: en
+pipeline:
+- name: SingleStepLLMCommandGenerator
+  llm:
+    model_group: rasa_command_generation_model
+  flow_retrieval:
+    active: false
+- name: SpacyNLP
+  model: "../spacy/output_model/model-best"
+- name : SpacyEntityExtractor
+  
+
+policies:
+- name: FlowPolicy
+#  - name: EnterpriseSearchPolicy
+assistant_id: 20250417-113342-orthogonal-accuracy
